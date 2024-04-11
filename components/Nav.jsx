@@ -18,7 +18,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Nav = () => {
-  const isUserLoggedIn = true;
+  const { data: session } = useSession();
 
   const [providers, setProviders] = useState(null);
   const [toggleNavDropDown, setToggleNavDropDown] = useState(false);
@@ -47,7 +47,7 @@ const Nav = () => {
 
       {/* Desktop Nav */}
       <div className="sm:flex hidden">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link className="black_btn" href="/create-job">
               Create Job
@@ -81,7 +81,7 @@ const Nav = () => {
                   onClick={() => signIn(provider.id)}
                   className="black_btn"
                 >
-                  Sign In
+                  {`${provider.name} Sign In`}
                 </button>
               ))}
           </>
@@ -89,11 +89,11 @@ const Nav = () => {
       </div>
 
       {/* Mobile Nav */}
-      <div className="sm:hidden flex relative">
-        {isUserLoggedIn ? (
+      {/* <div className="sm:hidden flex relative">
+        {!session?.user ? (
           <div className="flex">
             <FontAwesomeIcon
-              size="2lg"
+              size="xl"
               rotation={180}
               icon={faAlignLeft}
               onClick={() => setToggleNavDropDown((prev) => !prev)}
@@ -142,7 +142,7 @@ const Nav = () => {
               ))}
           </>
         )}
-      </div>
+      </div> */}
     </nav>
   );
 };
