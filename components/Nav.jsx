@@ -11,11 +11,7 @@ import {
   signIn,
   signOut,
 } from "next-auth/react";
-import {
-  faAlignLeft,
-  faAlignRight,
-  faUserCircle,
-} from "@fortawesome/free-solid-svg-icons";
+import { faAlignLeft, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 const Nav = () => {
   const { data: session } = useSession();
@@ -89,8 +85,8 @@ const Nav = () => {
       </div>
 
       {/* Mobile Nav */}
-      {/* <div className="sm:hidden flex relative">
-        {!session?.user ? (
+      <div className="sm:hidden flex relative">
+        {session?.user ? (
           <div className="flex">
             <FontAwesomeIcon
               size="xl"
@@ -135,14 +131,22 @@ const Nav = () => {
                   type="button"
                   key={provider.name}
                   onClick={() => signIn(provider.id)}
-                  className="black_btn"
+                  className="black_btn-sm"
                 >
-                  Sign In
+                  {/* <FontAwesomeIcon
+                    size="xl"
+                    rotation={180}
+                    prefix="fab"
+                    iconName={provider.name === "Google" ? "fa-github" : "fa-google"}
+                    icon={provider.name === "Google" ? "fa-github" : "fa-google"}
+                    onClick={() => setToggleNavDropDown((prev) => !prev)}
+                  /> */}
+                  {`${provider.name} Signin`}
                 </button>
               ))}
           </>
         )}
-      </div> */}
+      </div>
     </nav>
   );
 };
